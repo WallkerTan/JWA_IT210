@@ -1,0 +1,10 @@
+| # | Vị trí                                   | Loại vấn đề                       | Mô tả hậu quả                                                                                                               |
+| - | ---------------------------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| 1 | `<%! private int requestCounter = 0; %>` | **Race Condition / Shared State** | Biến khai báo ở mức Servlet → dùng chung cho mọi request → nhiều thread truy cập đồng thời → sai số liệu, không thread-safe |
+| 2 | `<% requestCounter++; %>`                | **Business Logic trong View**     | JSP xử lý logic → vi phạm nguyên tắc Thin View → khó maintain, khó test                                                     |
+| 3 | `<%= student.getName(); %>` (có dấu `;`) | **Sai cú pháp Expression**        | Expression `<%= %>` không cần `;` → có thể gây lỗi compile JSP                                                              |
+| 4 | `<!-- <%= student.getName() %> -->`      | **Sai loại comment**              | HTML comment vẫn render phía client → có thể lộ dữ liệu nhạy cảm                                                            |
+| 5 | `<% for(...) { %>`                       | **Scriptlet (Legacy code)**       | Trộn Java vào View → code rối, khó đọc, khó bảo trì                                                                         |
+| 6 | In dữ liệu trực tiếp `<%= userInput %>`  | **XSS (Cross-Site Scripting)**    | Nếu dữ liệu chứa script → bị inject → nguy cơ bảo mật                                                                       |
+| 7 | `<%= request.getAttribute("list") %>`    | **Coupling với Servlet API**      | JSP phụ thuộc trực tiếp request → không đúng chuẩn MVC                                                                      |
+| 8 | Không dùng EL `${}`                      | **Không tận dụng JSP EL**         | Code verbose, khó đọc, không tận dụng expression binding                                                                    |

@@ -1,0 +1,3 @@
+1. DispatcherServlet đang lắng nghe các URL dạng /api/*, nên mọi request ngoài /api/ (như /welcome) đều bị bỏ qua
+2. Spring MVC không thể tìm thấy @Controller, vì nó chỉ tìm trong com.demo.service và không tìm trong com.demo.controller
+3. Ứng dụng vẫn không chạy được nếu chỉ sửa Servlet Mapping, vì thiếu Controller trong context.
