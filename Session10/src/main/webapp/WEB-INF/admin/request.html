@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::section}, 'Danh sách yêu cầu')}">
+<section>
+  <div class="card card-soft">
+    <div class="card-body">
+      <h4 class="mb-3">Danh sách yêu cầu mượn</h4>
+
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Sinh viên</th>
+          <th>Mã SV</th>
+          <th>Email</th>
+          <th>Thiết bị</th>
+          <th>Số lượng</th>
+          <th>Ngày nhận</th>
+          <th>Ngày trả</th>
+          <th>Lý do</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="r : ${list}">
+          <td th:text="${r.id}">1</td>
+          <td th:text="${r.studentName}">Nguyễn Văn A</td>
+          <td th:text="${r.studentCode}">SV001</td>
+          <td th:text="${r.email}">a@gmail.com</td>
+          <td th:text="${r.equipment != null ? r.equipment.name : 'N/A'}">Màn hình rời</td>
+          <td th:text="${r.quantity}">1</td>
+          <td th:text="${r.borrowDate}">2026-01-01</td>
+          <td th:text="${r.returnDate}">2026-01-02</td>
+          <td th:text="${r.reason}">Học tập</td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(list)}">
+          <td colspan="9" class="text-center text-muted">Chưa có yêu cầu nào.</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</html>

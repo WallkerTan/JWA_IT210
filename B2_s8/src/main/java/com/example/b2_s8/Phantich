@@ -1,0 +1,29 @@
+//PHẦN 1 – Vì sao vẫn lỗi 400?
+//Nhìn code của bạn:
+//public String saveEmployee(
+//        @Valid @ModelAttribute("employee") EmployeeDto employee,
+//        Model model,
+//        BindingResult bindingResult
+//)
+//=>Sai ở thứ tự tham số
+//________________________________________
+// Quy tắc bắt buộc của Spring:
+//BindingResult phải đứng NGAY SAU object @Valid
+//________________________________________
+// Code hiện tại (sai):
+//@Valid EmployeeDto employee,
+//Model model,
+//BindingResult bindingResult
+//→ Spring KHÔNG gắn lỗi vào BindingResult
+//→ Nó ném luôn exception:
+//MethodArgumentNotValidException → 400 Bad Request
+//=> Vì vậy:
+//        •	bindingResult.hasErrors() KHÔNG BAO GIỜ chạy
+//•	HR thấy trang trắng
+//________________________________________
+//=> Đúng phải là:
+//@Valid EmployeeDto employee,
+//BindingResult bindingResult,
+//Model model
+//
+//

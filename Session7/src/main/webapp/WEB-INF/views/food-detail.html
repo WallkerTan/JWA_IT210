@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết món ăn</title>
+</head>
+<body>
+
+<h2>Chi tiết món ăn</h2>
+
+<p>Tên: <span th:text="${food.name}"></span></p>
+<p>Danh mục: <span th:text="${food.category}"></span></p>
+<p>Giá: <span th:text="${food.price}"></span></p>
+
+<p>Đường dẫn ảnh:</p>
+<p th:text="${food.imagePath}"></p>
+
+<!-- hiển thị ảnh -->
+<img th:src="'file:///' + ${food.imagePath}" width="300"/>
+
+<!-- thông báo -->
+<p style="color:green" th:if="${success}" th:text="${success}"></p>
+
+</body>
+</html>

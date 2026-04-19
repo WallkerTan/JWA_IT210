@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::section}, 'Form đăng ký mượn')}">
+<section>
+    <div class="card card-soft">
+        <div class="card-body">
+            <h4 class="mb-3">Form đăng ký mượn</h4>
+
+            <div class="alert alert-info" th:if="${equipment != null}">
+                Bạn đang đăng ký:
+                <strong th:text="${equipment.name}">Thiết bị</strong>
+                <span class="ms-2">(Còn lại: <span th:text="${equipment.quantity}">0</span>)</span>
+            </div>
+
+            <form th:action="@{/student/borrow}" th:object="${borrow}" method="post" class="row g-3">
+                <input type="hidden" th:field="*{equipmentId}">
+
+                <div class="col-md-6">
+                    <label class="form-label required">Họ và tên sinh viên</label>
+                    <input type="text" class="form-control" th:field="*{studentName}">
+                    <div class="text-danger small" th:errors="*{studentName}"></div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label required">Mã sinh viên</label>
+                    <input type="text" class="form-control" th:field="*{studentCode}">
+                    <div class="text-danger small" th:errors="*{studentCode}"></div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label required">Email liên hệ</label>
+                    <input type="email" class="form-control" th:field="*{email}">
+                    <div class="text-danger small" th:errors="*{email}"></div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label required">Số lượng muốn mượn</label>
+                    <input type="number" min="1" class="form-control" th:field="*{quantity}">
+                    <div class="text-danger small" th:errors="*{quantity}"></div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label required">Ngày dự kiến nhận</label>
+                    <input type="date" class="form-control" th:field="*{borrowDate}">
+                    <div class="text-danger small" th:errors="*{borrowDate}"></div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label required">Ngày dự kiến trả</label>
+                    <input type="date" class="form-control" th:field="*{returnDate}">
+                    <div class="text-danger small" th:errors="*{returnDate}"></div>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label required">Lý do mượn</label>
+                    <textarea class="form-control" rows="4" th:field="*{reason}"></textarea>
+                    <div class="text-danger small" th:errors="*{reason}"></div>
+                </div>
+
+                <div class="col-12 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">Gửi đăng ký</button>
+                    <a th:href="@{/student/equipments}" class="btn btn-outline-secondary">Quay lại danh mục</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+</html>

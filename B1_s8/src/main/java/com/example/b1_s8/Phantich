@@ -1,0 +1,22 @@
+//Phần 1 – Phân tích lỗi
+//(1) Lọt khoảng trắng vào Database
+//Bạn đang dùng:
+//@NotNull
+//→ Chỉ kiểm tra không được null, nhưng:
+//        •	" " (toàn space) ≠ null
+//        → Vẫn hợp lệ → lọt vào DB
+//=>Vì vậy người dùng nhập space → vẫn pass validation
+//        ________________________________________
+//(2) Không chặn được request từ Postman → lỗi 500
+//Trong controller:
+//public ResponseEntity<String> updateAddress(@RequestBody AddressDto addressDto)
+//=> Thiếu:
+//@Valid
+//Hệ quả:
+//        •	Validation KHÔNG chạy
+//•	Dữ liệu rác đi thẳng vào logic backend
+//•	Có thể gây:
+//o	NPE
+//o	DB constraint lỗi
+//→ dẫn đến 500 Internal Server Error
+//

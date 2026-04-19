@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::section}, 'Quản lý thiết bị')}">
+<section>
+  <div class="card card-soft">
+    <div class="card-body">
+      <h4 class="mb-3">Quản lý danh sách thiết bị</h4>
+
+      <table class="table table-bordered align-middle">
+        <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Tên</th>
+          <th>Hình ảnh</th>
+          <th>Số lượng còn lại</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="e : ${list}">
+          <td th:text="${e.id}">1</td>
+          <td th:text="${e.name}">Thiết bị</td>
+          <td>
+            <img th:src="${e.image}" alt="Ảnh thiết bị"
+                 style="width:100px;height:70px;object-fit:cover;" class="rounded border">
+          </td>
+
+          <td th:text="${e.quantity}">0</td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(list)}">
+          <td colspan="4" class="text-center text-muted">Chưa có dữ liệu.</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</html>

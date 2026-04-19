@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base}">
+<head>
+  <title>Chi tiết sách</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div th:replace="fragments/header :: header('Chi tiết sách')"></div>
+
+  <p><strong>Mã:</strong> <span th:text="${book.id}"></span></p>
+  <p><strong>Tên sách:</strong> <span th:text="${book.name}"></span></p>
+  <p><strong>Tác Giả:</strong> <span th:text="${book.author}"></span></p>
+  <p><strong>Giá:</strong> <span th:text="${book.price}"></span></p>
+
+  <a th:href="@{/books}">Quay lại danh sách</a>
+</div>
+</body>
+</html>
